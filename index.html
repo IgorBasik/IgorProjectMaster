@@ -31,7 +31,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -63,10 +63,11 @@
                     <small class="fa fa-phone-alt text-primary me-2"></small>
                     <small>+373 69 855 867</small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center">                    
+                <div class="h-100 d-inline-flex align-items-center">
                     <!--<a class="btn btn-sm-square bg-white text-primary me-1 btn-calculator" href="#"><i
                             class="fas fa-calculator"></i></a> -->
-                    <a class="btn btn-sm-square bg-white text-primary me-1 btn-calculator" href="#" data-target="#calc-modal" data-toggle="modal"><i class="fas fa-calculator"></i></a>
+                    <a class="btn btn-sm-square bg-white text-primary me-1 btn-calculator" href="#"
+                        data-target="#calc-modal" data-toggle="modal"><i class="fas fa-calculator"></i></a>
                     <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
                             class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
@@ -77,8 +78,8 @@
             </div>
         </div>
     </div>
-    <!-- Topbar End --> 
-   
+    <!-- Topbar End -->
+
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
@@ -642,10 +643,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row mb-3">
-                            <div class="col-5"> 
+                        <div class="form-group row mb-3 d-none" id="motor-type">
+                            <div class="col-5">
                                 <label for="engine-type">Motor type:</label>
-                            </div>    
+                            </div>
                             <div class="col-7">
                                 <select id="engine-type">
                                     <option value="diesel">Diesel</option>
@@ -661,9 +662,9 @@
                             </div>
                             <div class="col-7">
                                 <select id="hybrid-type">
-                                <option value="plugin">Hybrid plugin</option>
-                                <option value="full">Full hybrid</option>
-                                <option value="mild">Mild hybrid</option>
+                                    <option value="plugin">Hybrid plugin</option>
+                                    <option value="full">Full hybrid</option>
+                                    <option value="mild">Mild hybrid</option>
                                 </select>
                             </div>
                         </div>
@@ -673,8 +674,8 @@
                             </div>
                             <div class="col-7">
                                 <select id="hybrid-type-motorina">
-                                <option value="plugin">Diesel</option>
-                                <option value="full">Petrol</option>
+                                    <option value="hdiesel">Diesel</option>
+                                    <option value="full">Petrol</option>
                                 </select>
                             </div>
                         </div>
@@ -692,7 +693,8 @@
                                 <label for="engine-volume">Engine volume, cm³:</label>
                             </div>
                             <div class="col-7">
-                                <input type="number" id="engine-volume" name="engine-volume" min="0" max="9000" required>
+                                <input type="number" id="engine-volume" name="engine-volume" min="0" max="9000"
+                                    required>
                             </div>
                         </div>
                         <div class="form-group row mb-3">
@@ -704,110 +706,85 @@
                             </div>
                         </div>
                     </form>
+                    <div class="calculations d-none">
+                        <div class="form-group row mb-3">
+                            <div class="col">
+                                <p>The amount of excise duties:</p>
+                            </div>
+                            <div id="result" class="col"></div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <div class="col">
+                                <p>VAT cost:</p>
+                            </div>
+                            <div id="vat-cost" class="col"></div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <div class="col">
+                                <p>Fee for customs procedures:</p>
+                            </div>
+                            <div id="customs-procedures-cost" class="col"></div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <div class="col">
+                                <p>TOTAL customs expenses:</p>
+                            </div>
+                            <div id="customs-expenses-cost" class="col"></div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <div class="col">
+                                <p>TOTAL per vehicle:</p>
+                            </div>
+                            <div id="total-cost" class="col"></div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div class="modal-footer">
                     <button id="calculate" type="submit">Calculate</button>
                     <button id="cancel" data-bs-dismiss="modal">Cancel</button>
                 </div>
-                <div class="modal-body">
-                    <h5>Стоимость Акцизов:</h5>
-                    <p id="excise-cost"></p>
-                </div>
-                <div class="modal-body">
-                    <h5>Стоимость НДС:</h5>
-                    <p id="vat-cost"></p>
-                </div>
-                <div class="modal-body">
-                    <h5>Стоимость Таможенных процедур:</h5>
-                    <p id="customs-procedures-cost"></p>
-                </div>
-                <div class="modal-body">
-                    <h5>Стоимость Таможенных расходов:</h5>
-                    <p id="customs-expenses-cost"></p>
-                </div>
-                <div class="modal-body">
-                    <h5>Общая стоимость автомобиля:</h5>
-                    <p id="total-cost"></p>
-                </div>
-                
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
                     $(document).ready(function () {
-                        // Function to load the calculator.html content into the modal
-                        function loadCalculatorModal() {
-                            $.ajax({
-                                url: 'calculator.html',
-                                success: function (data) {
-                                    $('#exampleModal .modal-content').html(data);
+                                // Function to load the calculator.html content into the modal
+                                function loadCalculatorModal() {
+                                    $.ajax({
+                                        url: 'calculator.html',
+                                        success: function (data) {
+                                            $('#exampleModal .modal-content').html(data);
+                                        }
+                                    });
                                 }
-                            });
-                        }
-                
-                        // Event listener to trigger the modal and load the calculator.html content
-                        $('.btn-calculator').click(function (e) {
-                            e.preventDefault();
-                            loadCalculatorModal();
-                            $('#exampleModal').modal('show');
-                        });
-                
-                        // Event listener for the Calculate button
-                        $('#calculate').click(function (e) {
-                            e.preventDefault();
-                            // Здесь происходит расчет стоимости и присвоение значений переменным
-                            var exciseCost = 1000;
-                            var vatCost = 2000;
-                            var customsProceduresCost = 3000;
-                            var customsExpensesCost = 4000;
-                            var totalCost = exciseCost + vatCost + customsProceduresCost + customsExpensesCost;
-                
-                            // Вывод результатов в соответствующие окна
-                            $('#excise-cost').text(exciseCost);
-                            $('#vat-cost').text(vatCost);
-                            $('#customs-procedures-cost').text(customsProceduresCost);
-                            $('#customs-expenses-cost').text(customsExpensesCost);
-                            $('#total-cost').text(totalCost);
-                        });
+
+                                // Event listener to trigger the modal and load the calculator.html content
+                                $('.btn-calculator').click(function (e) {
+                                    e.preventDefault();
+                                    loadCalculatorModal();
+                                    $('#exampleModal').modal('show');
+                                });
                     });
+                                // Event listener for the Calculate button
                 </script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
-                  $(document).ready(function() {
-                    // Код для вызова модального окна
-                    $('.open-modal').click(function() {
-                      $('#modal-container').load('calculator.html #exampleModal', function() {
-                        $('#exampleModal').modal('show');
-                      });
+                    $(document).ready(function () {
+                        // Код для вызова модального окна
+                        $('.open-modal').click(function () {
+                            $('#modal-container').load('calculator.html #exampleModal', function () {
+                                $('#exampleModal').modal('show');
+                            });
+                        });
+
+                        // Код для настройки и обработки формы внутри модального окна
+
                     });
-           
-                    // Код для настройки и обработки формы внутри модального окна
-                  
-                  });
                 </script>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/app/js/modules/calculator.js"></script>
-    <script>    
-        $(document).ready(function () {
-            // Function to load the calculator.html content into the modal
-            function loadCalculatorModal() {
-                $.ajax({
-                    url: 'calculator.html',
-                    success: function (data) {
-                        $('#exampleModal .modal-content').html(data);
-                    }
-                });
-            }
-
-            // Event listener to trigger the modal and load the calculator.html content
-            $('.btn-calculator').click(function (e) {
-                e.preventDefault();
-                loadCalculatorModal();
-                $('#exampleModal').modal('show');
-            });           
-    </script>
 
     <!-- Calculator End -->
 
@@ -869,7 +846,7 @@
             </div>
         </div>
     </div>
-     <!-- Back to Top -->
+    <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
@@ -883,9 +860,10 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    
+
     <!-- Template Javascript -->
-    <script src="app/js/main.js"></script>
-    <script src="app/js/modal.js"> </script> 
+    <script src="app/js/main1.js"></script>
+    <script src="app/js/modal.js"> </script>
 </body>
+
 </html>

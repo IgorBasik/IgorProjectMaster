@@ -1,138 +1,138 @@
+<!-- Calculator Start -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Customs clearance calculator</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group row mb-3">
-                    <div class="col-5">
-                        <label for="vehicle-type">Vehicle type:</label>
-                    </div>
-                    <div class="col-7">
-                        <select id="vehicle-type">
-                            <option value="motorcycle">Motorbike</option>
-                            <option value="car">Car</option>
-                            <!--<option value="truck">Truck</option> -->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-3">
-                    <div class="col-5"> 
-                        <label for="engine-type">Motor type:</label>
-                    </div>    
-                    <div class="col-7">
-                        <select id="engine-type">
-                            <option value="diesel">Diesel</option>
-                            <option value="gasoline">Petrol</option>
-                            <option value="electric">Electric car </option>
-                            <option value="hybrid">Hybrid</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-3 d-none" id="hybrid-type-wrapper">
-                    <div class="col-5">
-                        <label for="hybrid-type">Hybrid type:</label>
-                    </div>
-                    <div class="col-7">
-                        <select id="hybrid-type">
-                        <option value="plugin">Hybrid plugin</option>
-                        <option value="full">Full hybrid</option>
-                        <option value="mild">Mild hybrid</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-3 d-none" id="hybrid-type-fuel">
-                    <div class="col-5">
-                        <label for="hybrid-type-motorina">Hybrid type fuel:</label>
-                    </div>
-                    <div class="col-7">
-                        <select id="hybrid-type-motorina">
-                        <option value="plugin">Diesel</option>
-                        <option value="full">Petrol</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row mb-3">
-                    <div class="col-5">
-                        <label for="year-of-manufacture">Release year:</label>
-                    </div>
-                    <div class="col-7">
-                        <input type="number" id="year-of-manufacture" name="year-of-manufacture" min="1900"
-                            max="2100" required>
-                    </div>
-                </div>
-                <div class="form-group row mb-3">
-                    <div class="col-5">
-                        <label for="engine-volume">Engine volume, cm³:</label>
-                    </div>
-                    <div class="col-7">
-                        <input type="number" id="engine-volume" name="engine-volume" min="0" max="9000" required>
-                    </div>
-                </div>
-                <div class="form-group row mb-3">
-                    <div class="col-5">
-                        <label for="car-price">Car Price €:</label>
-                    </div>
-                    <div class="col-7">
-                        <input type="number" id="car-price" name="car-price" min="0" max="100000" required>
-                    </div>
-                </div>
-            </form>
-        </div>
-        
-        <div class="modal-footer">
-            <button id="calculate" type="submit">Calculate</button>
-            <button id="cancel" data-bs-dismiss="modal">Cancel</button>
-        </div>
-        <div class="modal-body">
-            <h5>Стоимость Акцизов:</h5>
-            <p id="excise-cost"></p>
-        </div>
-        <div class="modal-body">
-            <h5>Стоимость НДС:</h5>
-            <p id="vat-cost"></p>
-        </div>
-        <div class="modal-body">
-            <h5>Стоимость Таможенных процедур:</h5>
-            <p id="customs-procedures-cost"></p>
-        </div>
-        <div class="modal-body">
-            <h5>Стоимость Таможенных расходов:</h5>
-            <p id="customs-expenses-cost"></p>
-        </div>
-        <div class="modal-body">
-            <h5>Общая стоимость автомобиля:</h5>
-            <p id="total-cost"></p>
-        </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Customs clearance calculator</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row mb-3">
+            <div class="col-5">
+              <label for="vehicle-type">Vehicle type:</label>
+            </div>
+            <div class="col-7">
+              <select id="vehicle-type">
+                <option value="motorcycle">Motorbike</option>
+                <option value="car">Car</option>
+                <!--<option value="truck">Truck</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-3 d-none" id="motor-type">
+            <div class="col-5">
+              <label for="engine-type">Motor type:</label>
+            </div>
+            <div class="col-7">
+              <select id="engine-type">
+                <option value="diesel">Diesel</option>
+                <option value="gasoline">Petrol</option>
+                <option value="electric">Electric car </option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-3 d-none" id="hybrid-type-wrapper">
+            <div class="col-5">
+              <label for="hybrid-type">Hybrid type:</label>
+            </div>
+            <div class="col-7">
+              <select id="hybrid-type">
+                <option value="plugin">Hybrid plugin</option>
+                <option value="full">Full hybrid</option>
+                <option value="mild">Mild hybrid</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-3 d-none" id="hybrid-type-fuel">
+            <div class="col-5">
+              <label for="hybrid-type-motorina">Hybrid type fuel:</label>
+            </div>
+            <div class="col-7">
+              <select id="hybrid-type-motorina">
+                <option value="hdiesel">Diesel</option>
+                <option value="full">Petrol</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-5">
+              <label for="year-of-manufacture">Release year:</label>
+            </div>
+            <div class="col-7">
+              <input type="number" id="year-of-manufacture" name="year-of-manufacture" min="1900" max="2100" required>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-5">
+              <label for="engine-volume">Engine volume, cm³:</label>
+            </div>
+            <div class="col-7">
+              <input type="number" id="engine-volume" name="engine-volume" min="0" max="9000" required>
+            </div>
+          </div>
+          <div class="form-group row mb-3">
+            <div class="col-5">
+              <label for="car-price">Car Price €:</label>
+            </div>
+            <div class="col-7">
+              <input type="number" id="car-price" name="car-price" min="0" max="100000" required>
+            </div>
+          </div>
+        </form>
+      </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Function to load the calculator.html content into the modal
-        function loadCalculatorModal() {
+      <div class="modal-footer">
+        <button id="calculate" type="submit">Calculate</button>
+        <button id="cancel" data-bs-dismiss="modal">Cancel</button>
+      </div>
+      <div class="modal-body">
+        <h5>Стоимость Акцизов:</h5>
+        <div id="result"></div>
+      </div>
+      <div class="modal-body">
+        <h5>Стоимость НДС:</h5>
+        <p id="vat-cost"></p>
+      </div>
+      <div class="modal-body">
+        <h5>Стоимость Таможенных процедур:</h5>
+        <p id="customs-procedures-cost"></p>
+      </div>
+      <div class="modal-body">
+        <h5>Стоимость Таможенных расходов:</h5>
+        <p id="customs-expenses-cost"></p>
+      </div>
+      <div class="modal-body">
+        <h5>Общая стоимость автомобиля:</h5>
+        <p id="total-cost"></p>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          // Function to load the calculator.html content into the modal
+          function loadCalculatorModal() {
             $.ajax({
-                url: 'calculator.html',
-                success: function (data) {
-                    $('#exampleModal .modal-content').html(data);
-                }
+              url: 'calculator.html',
+              success: function (data) {
+                $('#exampleModal .modal-content').html(data);
+              }
             });
-        }
+          }
 
-        // Event listener to trigger the modal and load the calculator.html content
-        $('.btn-calculator').click(function (e) {
+          // Event listener to trigger the modal and load the calculator.html content
+          $('.btn-calculator').click(function (e) {
             e.preventDefault();
             loadCalculatorModal();
             $('#exampleModal').modal('show');
-        });
+          });
 
-        // Event listener for the Calculate button
-        $('#calculate').click(function (e) {
+          // Event listener for the Calculate button
+          $('#calculate').click(function (e) {
             e.preventDefault();
             // Здесь происходит расчет стоимости и присвоение значений переменным
             var exciseCost = 1000;
@@ -147,31 +147,47 @@ aria-hidden="true">
             $('#customs-procedures-cost').text(customsProceduresCost);
             $('#customs-expenses-cost').text(customsExpensesCost);
             $('#total-cost').text(totalCost);
+          });
         });
-    });
-</script>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+      </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
         $(document).ready(function () {
-            // Function to load the calculator.html content into the modal
-            function loadCalculatorModal() {
-                $.ajax({
-                    url: 'calculator.html',
-                    success: function (data) {
-                        $('#exampleModal .modal-content').html(data);
-                    }
-                });
-            }
-
-            // Event listener to trigger the modal and load the calculator.html content
-            $('.btn-calculator').click(function (e) {
-                e.preventDefault();
-                loadCalculatorModal();
-                $('#exampleModal').modal('show');
+          // Код для вызова модального окна
+          $('.open-modal').click(function () {
+            $('#modal-container').load('calculator.html #exampleModal', function () {
+              $('#exampleModal').modal('show');
             });
-           
-    </script>
-    <!-- Calculator End -->
+          });
+
+          // Код для настройки и обработки формы внутри модального окна
+
+        });
+      </script>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/app/js/modules/calculator.js"></script>
+<script>
+  $(document).ready(function () {
+        // Function to load the calculator.html content into the modal
+        function loadCalculatorModal() {
+          $.ajax({
+            url: 'calculator.html',
+            success: function (data) {
+              $('#exampleModal .modal-content').html(data);
+            }
+          });
+        }
+
+        // Event listener to trigger the modal and load the calculator.html content
+        $('.btn-calculator').click(function (e) {
+          e.preventDefault();
+          loadCalculatorModal();
+          $('#exampleModal').modal('show');
+        });
+  });
+        </script>
+
+<!-- Calculator End -->

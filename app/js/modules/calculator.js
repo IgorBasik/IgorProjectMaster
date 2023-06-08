@@ -2,21 +2,22 @@ $(document).ready(function () {
     $('#engine-type').on('change', function () {
         if (this.value === "hybrid") {
             $('#hybrid-type-wrapper').removeClass('d-none');
+            $('#hybrid-type-fuel').removeClass('d-none');
         } else {
             $('#hybrid-type-wrapper').addClass('d-none');
             $('#hybrid-type-fuel').addClass('d-none');
         }
     });
+    $('#vehicle-type').on('change', function () {
+        if (this.value === "car") {
+            $('#motor-type').removeClass('d-none');
 
-    // Отображение поля выбора типа топлива для гибридной машины в зависимости от выбранного типа гибрида
-
-    $('#hybrid-type').on('change', function () {
-        if (this.value === "plugin" || this.value === "full") {
-            $('#hybrid-type-fuel').removeClass('d-none');
         } else {
-            $('#hybrid-type-fuel').addClass('d-none');
+            $('#motor-type').addClass('d-none');
+
         }
     });
+
 
     // Обработка нажатия на кнопку расчета
 
@@ -28,13 +29,26 @@ $(document).ready(function () {
         let hybridFuelType = $('#hybrid-type-motorina').val();
         let releaseYear = $('#year-of-manufacture').val();
         let engineVolume = $('#engine-volume').val();
+        let carPrice = $('#car-price').val();
 
-        if (vehicleType === "car" || vehicleType === "truck") { // Проверка на наличие акциза только для легковых и грузовых автомобилей
+        console.log('vehicleType', vehicleType);
+        console.log('engineType', engineType);
+        console.log('hybridType', hybridType);
+        console.log('hybridFuelType', hybridFuelType);
+        console.log('releaseYear', releaseYear);
+        console.log('engineVolume', engineVolume);
+        console.log('carPrice', carPrice);
+
+        let now = new Date().getFullYear(); // Текущий год
+        let vehicleAge = now - releaseYear; // Вычисляем возраст автомобиля
+        console.log('vehicleAge', vehicleAge);
+
+
+        if (vehicleType === "car"|| (vehicleType === "motorcycle" && vehicleAge > 10) ) { // Проверка на наличие акциза для легковых автомобилей и мотоциклов(только бензин)
             let exciseRate;
-            let now = new Date().getFullYear(); // Текущий год
-            let vehicleAge = now - releaseYear; // Вычисляем возраст автомобиля
+            if (engineType === "gasoline" ||
+                (engineType === 'hybrid' && hybridFuelType === 'full')) { // Стоимость акциза для бензиновых двигателей
 
-            if (engineType === "gasoline") { // Стоимость акциза для бензиновых двигателей
                 if (engineVolume <= 1000) {
                     if (vehicleAge <= 2) {
                         exciseRate = 9.56;
@@ -217,7 +231,7 @@ $(document).ready(function () {
                     }
                 }
             }
-            if (engineType === "diesel") { // Стоимость акциза для дизельных двигателей
+            if (engineType === "diesel" || (engineType === 'hybrid' && hybridFuelType === 'hdiesel')) { // Стоимость акциза для дизельных двигателей
                 if (engineVolume <= 1500) {
                     if (vehicleAge <= 2) {
                         exciseRate = 12.23;
@@ -328,37 +342,50 @@ $(document).ready(function () {
                     }
                 }
             }
+            //console.log(exciseRate);
             // Уменьшение ставки акциза для гибридных автомобилей
 
             if (engineType === "hybrid") {
                 if (hybridType === "plugin") { // Плагин-гибрид
-                    if (hybridFuelType === "diesel") { // Тип топлива - дизель
-                        exciseRate = exciseRate.map(rate => rate / 2);
-                    } else { // Тип топлива - бензин
-                        exciseRate = exciseRate.map(rate => rate / 2);
-                    }
+                    exciseRate = exciseRate / 2;
                 } else if (hybridType === "full") { // Полный гибрид
-                    if (hybridFuelType === "diesel") { // Тип топлива - дизель
-                        exciseRate = exciseRate.map(rate => rate * 0.75);
-                    } else { // Тип топлива - бензин
-                        exciseRate = exciseRate.map(rate => rate * 0.75);
-                    }
+                    exciseRate = exciseRate * 0.75;
                 }
             }
 
-            let totalExcise = 0;
-
-            for (let i = 0; i < exciseRate.length; i++) {
-                if (i >= vehicleAge) {
-                    totalExcise += exciseRate[i] * engineVolume;
-                }
-            }
+            let totalExcise = exciseRate * engineVolume;
 
             // Вывод результата
 
-            $('#result').text('Total excise: ' + totalExcise.toFixed(2) + ' lei');
-        } else { // Для мотоциклов и электромобилей акцизы не уплачиваются
+            $('#result').text(totalExcise.toFixed(2) + ' lei');
+        } else {
+            // расчет акцизов для мотоцикла
+            if ($('#vehicle-type' === "motorcycle") && vehicleAge <= 10) {
+                totalExcise = 0;
+            }
+             // Для мотоциклов и электромобилей акцизы не уплачиваются
             $('#result').text('No excise for motorcycles or electric cars.');
         }
+        // Здесь происходит расчет стоимости и присвоение значений переменным
+        var exciseCost = 1000;
+        var vatCost = 0;
+        if (vehicleType === "motorcycle") {
+            vatCost = carPrice * 0.2*19;
+        } 
+        $('#vat-cost').text(vatCost.toFixed(2) + ' lei');
+       console.log('НДС:', vatCost);
+        var customsProceduresCost = 160;
+        var customsExpensesCost = 4000;
+        var totalCost = vatCost + customsProceduresCost +
+            customsExpensesCost;
+
+        // Вывод результатов в соответствующие окна
+        $('#excise-cost').text(exciseCost);
+        $('#vat-cost').text(vatCost + 'lei');
+        $('#customs-procedures-cost').text(customsProceduresCost + 'lei');
+        $('#customs-expenses-cost').text(customsExpensesCost);
+        $('#total-cost').text(totalCost);
+
+        $('.calculations').removeClass('d-none');
     });
 });

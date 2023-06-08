@@ -47,6 +47,9 @@ $(document).ready(function () {
       $('#engine-volume').val(''); // reset engine volume input
       $('#hybrid-type-wrapper').addClass('d-none'); // hide hybrid type dropdown
       $('#hybrid-type-fuel').addClass('d-none'); // hide hybrid type fuel dropdown
+      $('.calculations').addClass('d-none'); // hide all rows with calculations
+      $('#motor-type').addClass('d-none'); // hide hybrid type fuel dropdown
+      $('#car-price').val(''); // reset car-price cost input
     });
   });
 
